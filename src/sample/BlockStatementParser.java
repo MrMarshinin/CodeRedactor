@@ -10,7 +10,6 @@ public class BlockStatementParser extends StatementParser {
     BlockStatement splitStatements(String stringToParse) {
         parser = new Parser(stringToParse);
         update();
-        System.out.println("Size BlockStatement " + parser.getStatementList().size());
         blockStatement = new BlockStatement(parser.getStatementList());
         return blockStatement;
     }

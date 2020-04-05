@@ -46,7 +46,6 @@ public class IfStatementParser extends StatementParser {
     void doAction() {
         conditionExpression = conditionExpressionParser.update();
         blockStatementParser.update();
-        System.out.println("blockStatement.size() "+blockStatement.size());
         ifStatement = new IfStatement(conditionExpression, blockStatement);
         ifStatement.doAction();
     }

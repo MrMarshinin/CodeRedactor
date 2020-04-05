@@ -13,7 +13,6 @@ public class BlockStatement extends Statement {
 
     @Override
     public void doAction() {
-        System.out.println("BlockStatement doAction statementList.size() " + statementList.size());
         statementList.doAction();
     }
 

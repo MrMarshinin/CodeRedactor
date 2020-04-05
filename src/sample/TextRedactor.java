@@ -53,14 +53,17 @@ public class TextRedactor {
         parser.doAction();
         output.setText("Output:");
         for (int i = 0; i < ExpressionStatement.getOutput().size(); i++) {
-            System.out.println(ExpressionStatement.getOutput().get(i));
             output.setText(output.getText() + " " + ExpressionStatement.getOutput().get(i));
         }
     }
 
     public void buildTree(String string) {
-        parser = new Parser(string);
-        parser.update();
-        numberOfIfStatements.setText("Number of if statements: " + parser.getNumberOfIfStatements());
+        try {
+            parser = new Parser(string);
+            parser.update();
+            numberOfIfStatements.setText("Number of if statements: " + parser.getNumberOfIfStatements());
+        } catch (StringIndexOutOfBoundsException e){
+
+        }
     }
 }

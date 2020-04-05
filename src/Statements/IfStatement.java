@@ -12,7 +12,6 @@ private BlockStatement blockStatement;
     @Override
     public void doAction() {
         if (compareExpression.getAnswer() != 0){
-            System.out.println("compareExpression.getAnswer() != 0 blockStatement.size() " + blockStatement.size());
             blockStatement.doAction();
         }
     }

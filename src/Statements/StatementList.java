@@ -19,10 +19,7 @@ public class StatementList {
     public void doAction() {
         if (!statements.isEmpty()) {
             for (int i = 0; i < statements.size(); i++) {
-                System.out.println("i " + i);
-                System.out.println(statements.get(i) instanceof IfStatement);
-                if (statements.get(i) instanceof IfStatement){
-                    System.out.println("Answer " +  ((IfStatement) statements.get(i)).getCompareExpressionAnswer());
+                 if (statements.get(i) instanceof IfStatement){
                 }
                 statements.get(i).doAction();
             }
