@@ -1,4 +1,4 @@
-package Statements;
+package statements;
 
 import java.util.ArrayList;
 
@@ -26,4 +26,25 @@ public class MultiplyDivisionExpressionsList extends ConditionExpression {
         }
         return answer;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        } else if (!(obj instanceof MultiplyDivisionExpressionsList)){
+            return false;
+        } else if (!(((MultiplyDivisionExpressionsList) obj).multiplyDivisionExpressions.size()
+                == multiplyDivisionExpressions.size())){
+            return false;
+        } else {
+            for (int i = 0; i < multiplyDivisionExpressions.size(); i++){
+                if (!(multiplyDivisionExpressions.get(i).equals(
+                        ((MultiplyDivisionExpressionsList) obj).multiplyDivisionExpressions.get(i)))){
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+
 }

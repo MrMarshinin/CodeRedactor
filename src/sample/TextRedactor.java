@@ -1,7 +1,6 @@
 package sample;
 
-import Statements.ExpressionStatement;
-import Statements.IfStatement;
+import statements.ExpressionStatement;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,34 +11,31 @@ import javafx.stage.Stage;
 
 
 public class TextRedactor {
-    private Stage window;
-    private Scene scene;
     private Button button;
     private Label output;
-    private Label numberOfIfStatements;
     private TextArea input;
     private Parser parser;
+    private TreeComparator treeComparator;
 
     void showRedactor(Stage primaryStage) {
-        window = primaryStage;
-        window.setTitle("Code Redactor");
+        primaryStage.setTitle("Code Redactor");
         VBox layout = new VBox(10);
         layout.setPadding(new Insets(20, 20, 20, 20));
-        layout.getChildren().addAll(input, button, numberOfIfStatements, output);
-        scene = new Scene(layout, 300, 250);
-        window.setScene(scene);
-        window.show();
+        layout.getChildren().addAll(input, button, output);
+        Scene scene = new Scene(layout, 300, 250);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
     public TextRedactor() {
         button = new Button("Update");
-        button.setOnAction(e -> doAction(input.getText()));
+        //button.setOnAction(e -> doAction(input.getText()));
+        button.setOnAction(e -> treeComparator.update(input.getText()));
         output = new Label();
         output.setText("Output:");
-        numberOfIfStatements = new Label();
-        numberOfIfStatements.setText("Number of if statements: " + 0);
         input = new TextArea();
-        input.setOnKeyPressed(e -> buildTree(input.getText()));
+        //input.setOnKeyPressed(e -> treeComparator.update(input.getText()));
+        treeComparator = new TreeComparator();
     }
 
     public void update(String string) {
@@ -54,16 +50,6 @@ public class TextRedactor {
         output.setText("Output:");
         for (int i = 0; i < ExpressionStatement.getOutput().size(); i++) {
             output.setText(output.getText() + " " + ExpressionStatement.getOutput().get(i));
-        }
-    }
-
-    public void buildTree(String string) {
-        try {
-            parser = new Parser(string);
-            parser.update();
-            numberOfIfStatements.setText("Number of if statements: " + parser.getNumberOfIfStatements());
-        } catch (StringIndexOutOfBoundsException e){
-
         }
     }
 }

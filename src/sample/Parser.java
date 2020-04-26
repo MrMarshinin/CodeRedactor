@@ -1,13 +1,13 @@
 package sample;
 
-import Statements.StatementList;
+import statements.StatementList;
 
 import java.util.ArrayList;
 
 public class Parser {
     private StatementList statementList = new StatementList();
     private String stringToParse;
-    private ArrayList<StatementParser> statementParsers = new ArrayList<>();
+    private final ArrayList<StatementParser> statementParsers = new ArrayList<>();
 
     public Parser(String stringToParse) {
         stringToParse = stringToParse.replaceAll(" ", "");
@@ -17,7 +17,7 @@ public class Parser {
         getStatements();
     }
 
-    public void getStatements() {
+    private void getStatements() {
         statementList = new StatementList();
         while (!stringToParse.isEmpty()) {
             try {
@@ -38,7 +38,6 @@ public class Parser {
                         }
                     }
                 }
-
                 statementParsers.add(ifStatementParser);
             } catch (AnotherStatementException e) {
                 try {
@@ -65,19 +64,15 @@ public class Parser {
     }
 
     public void update() {
-        for (int i = 0; i < statementParsers.size(); i++) {
-            statementParsers.get(i).update();
+        for (StatementParser statementParser : statementParsers) {
+            statementParser.update();
         }
     }
 
     public void doAction() {
-        for (int i = 0; i < statementParsers.size(); i++){
-            statementParsers.get(i).doAction();
+        for (StatementParser statementParser : statementParsers) {
+            statementParser.doAction();
         }
-    }
-
-    public int getNumberOfIfStatements() {
-        return statementList.getNumberOfIfStatements();
     }
 
 }

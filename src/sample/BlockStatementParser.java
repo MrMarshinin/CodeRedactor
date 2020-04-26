@@ -1,6 +1,6 @@
 package sample;
 
-import Statements.BlockStatement;
+import statements.BlockStatement;
 
 public class BlockStatementParser extends StatementParser {
     private BlockStatement blockStatement;

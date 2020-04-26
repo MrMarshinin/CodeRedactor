@@ -1,6 +1,6 @@
 package sample;
 
-import Statements.*;
+import statements.*;
 
 public class MultiplyDivisionExpressionParser extends ExpressionParser {
     public MultiplyDivisionExpressionParser(String stringToParse) {
@@ -10,7 +10,7 @@ public class MultiplyDivisionExpressionParser extends ExpressionParser {
     @Override
     public ConditionExpression update() {
         MultiplyDivisionExpressionsList expression;
-        int index = 0;
+        int index;
         if (stringToParse.contains("*") && stringToParse.contains("/")) {
             index = Math.min(stringToParse.indexOf("*"), stringToParse.indexOf("/"));
         } else if (stringToParse.contains("*")) {
@@ -55,11 +55,10 @@ public class MultiplyDivisionExpressionParser extends ExpressionParser {
                 this.stringToParse = "";
             }
 
+            SimpleExpressionParser simpleExpressionParser = new SimpleExpressionParser(previousString.substring(1));
             if (previousString.startsWith("/")) {
-                SimpleExpressionParser simpleExpressionParser = new SimpleExpressionParser(previousString.substring(1));
                 expression.addExpression(new DivisionExpression(simpleExpressionParser.update()));
             } else {
-                SimpleExpressionParser simpleExpressionParser = new SimpleExpressionParser(previousString.substring(1));
                 expression.addExpression(new MultiplyExpression(simpleExpressionParser.update()));
             }
         }

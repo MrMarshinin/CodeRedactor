@@ -1,6 +1,6 @@
 package sample;
 
-import Statements.ConditionExpression;
+import statements.ConditionExpression;
 
 public class ConditionExpressionParser extends ExpressionParser {
     public ConditionExpressionParser(String stringToParse) {

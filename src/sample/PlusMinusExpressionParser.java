@@ -1,6 +1,6 @@
 package sample;
 
-import Statements.*;
+import statements.*;
 
 public class PlusMinusExpressionParser extends ExpressionParser {
     public PlusMinusExpressionParser(String stringToParse) {

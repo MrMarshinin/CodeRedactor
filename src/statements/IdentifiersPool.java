@@ -1,12 +1,12 @@
-package Statements;
+package statements;
 
 import java.util.ArrayList;
 
 public class IdentifiersPool {
-    private ArrayList<Identifier> identifiers;
+    private final ArrayList<Identifier> identifiers;
 
     public IdentifiersPool() {
-        identifiers = new ArrayList<Identifier>();
+        identifiers = new ArrayList<>();
     }
 
     public Identifier getIdentifier(String name) {
@@ -21,9 +21,5 @@ public class IdentifiersPool {
         identifier.value = 0;
         identifiers.add(identifier);
         return identifier;
-    }
-
-    public void addIdentifier(Identifier identifier) {
-        identifiers.add(identifier);
     }
 }

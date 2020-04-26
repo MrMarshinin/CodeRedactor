@@ -1,6 +1,6 @@
 package sample;
 
-import Statements.*;
+import statements.*;
 
 public class CompareExpressionParser extends ExpressionParser {
 

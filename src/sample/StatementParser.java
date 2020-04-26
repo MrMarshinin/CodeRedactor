@@ -1,6 +1,6 @@
 package sample;
 
-import Statements.Statement;
+import statements.Statement;
 
 public abstract class StatementParser {
 

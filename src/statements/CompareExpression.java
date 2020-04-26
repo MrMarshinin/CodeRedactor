@@ -1,4 +1,4 @@
-package Statements;
+package statements;
 
 public abstract class CompareExpression extends ConditionExpression {
     ConditionExpression firstExpression;

@@ -1,4 +1,4 @@
-package Statements;
+package statements;
 
 public abstract class MultiplyDivisionExpression extends ConditionExpression {
     SimpleExpression simpleExpression;

@@ -1,4 +1,4 @@
-package Statements;
+package statements;
 
 
 
@@ -24,5 +24,16 @@ public class Identifier extends SimpleExpression{
             identifiersPool = new IdentifiersPool();
         }
         identifiersPool.getIdentifier(this.name).value = value;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null){
+            return false;
+        } else if (!(obj instanceof Identifier)){
+            return false;
+        } else {
+            return name.equals(((Identifier) obj).name);
+        }
     }
 }

@@ -1,8 +1,8 @@
 package sample;
 
-import Statements.Identifier;
-import Statements.IntegerExpression;
-import Statements.SimpleExpression;
+import statements.Identifier;
+import statements.IntegerExpression;
+import statements.SimpleExpression;
 
 public class SimpleExpressionParser extends ExpressionParser {
     public SimpleExpressionParser(String stringToParse) {

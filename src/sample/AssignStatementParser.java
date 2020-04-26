@@ -1,9 +1,9 @@
 package sample;
 
-import Statements.AssignStatement;
-import Statements.ConditionExpression;
-import Statements.Identifier;
-import Statements.Statement;
+import statements.AssignStatement;
+import statements.ConditionExpression;
+import statements.Identifier;
+import statements.Statement;
 
 public class AssignStatementParser extends StatementParser {
     private AssignStatement assignStatement;

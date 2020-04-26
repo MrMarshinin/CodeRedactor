@@ -1,7 +1,6 @@
-package Statements;
+package statements;
 
 public class ConditionExpression extends Expression {
-    private ConditionExpression conditionExpression;
 
     @Override
     public int getAnswer() {

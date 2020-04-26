@@ -1,6 +1,6 @@
 package sample;
 
-import Statements.Expression;
+import statements.Expression;
 
 public abstract class ExpressionParser{
     protected String stringToParse;

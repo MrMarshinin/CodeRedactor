@@ -1,7 +1,7 @@
-package Statements;
+package statements;
 
 public class SimpleExpression extends ConditionExpression {
-    int value;
+    protected int value;
 
     @Override
     public int getAnswer() {

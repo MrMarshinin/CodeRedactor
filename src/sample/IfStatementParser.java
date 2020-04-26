@@ -1,9 +1,9 @@
 package sample;
 
-import Statements.BlockStatement;
-import Statements.ConditionExpression;
-import Statements.IfStatement;
-import Statements.Statement;
+import statements.BlockStatement;
+import statements.ConditionExpression;
+import statements.IfStatement;
+import statements.Statement;
 
 public class IfStatementParser extends StatementParser {
     private ConditionExpressionParser conditionExpressionParser;
