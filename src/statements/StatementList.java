@@ -48,4 +48,13 @@ public class StatementList {
         }
     }
 
+    public ArrayList<IfStatement> getInnerIfStatements(){
+        ArrayList<IfStatement> ifStatements = new ArrayList<>();
+        for (Statement statement : statements){
+            if (statement instanceof IfStatement){
+                ifStatements.add((IfStatement) statement);
+            }
+        }
+        return ifStatements;
+    }
 }

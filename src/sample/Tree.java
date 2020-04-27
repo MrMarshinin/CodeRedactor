@@ -12,7 +12,7 @@ public class Tree {
 
     public Tree(StatementList statementList) {
         this.statementList = statementList;
-        this.wrappedIfStatements = getIfStatements();
+        this.wrappedIfStatements = getIfStatements(statementList);
     }
 
     @Override
@@ -28,27 +28,6 @@ public class Tree {
         }
     }
 
-    private static class WrappedIfStatement {
-        private final IfStatement ifStatement;
-        private boolean wasNotified;
-
-        public WrappedIfStatement(IfStatement ifStatement, boolean wasNotified) {
-            this.ifStatement = ifStatement;
-            this.wasNotified = wasNotified;
-        }
-
-        @Override
-        public boolean equals(Object obj) {
-            if (obj == null) {
-                return false;
-            } else if (!(obj instanceof WrappedIfStatement)) {
-                return false;
-            } else {
-                return ifStatement.equals(((WrappedIfStatement) obj).ifStatement)
-                        && ((WrappedIfStatement) obj).wasNotified == wasNotified;
-            }
-        }
-    }
 
     /**
      * Returns true if newTree contains IfStatement that was not notified neither in newTree nor in this.
@@ -57,26 +36,35 @@ public class Tree {
         boolean wasIfStatementAdded = false;
         newTree.notifyExistingIfStatements(this);
         for (WrappedIfStatement wrappedIfStatement : newTree.wrappedIfStatements) {
-            if (!wrappedIfStatement.wasNotified) {
-                wasIfStatementAdded = true;
-                break;
+            if (wrappedIfStatement.wasNotNotified()) {
+                if (!wrappedIfStatement.hasSameNeighbours(this)){
+                    wasIfStatementAdded = true;
+                }
             }
         }
         notifyAllIfStatements();
         return wasIfStatementAdded;
     }
 
-    private ArrayList<WrappedIfStatement> getIfStatements() {
-        if (wrappedIfStatements == null) {
-            ArrayList<WrappedIfStatement> thisLIst = new ArrayList<>();
-            for (int i = 0; i < statementList.size(); i++) {
-                if (statementList.get(i) instanceof IfStatement) {
-                    thisLIst.add(new WrappedIfStatement((IfStatement) statementList.get(i), false));
-                }
+    private ArrayList<WrappedIfStatement> getIfStatements(StatementList statementList) {
+        ArrayList<WrappedIfStatement> thisList = new ArrayList<>();
+        for (int i = 0; i < statementList.size(); i++) {
+            if (statementList.get(i) instanceof IfStatement) {
+                ArrayList<WrappedIfStatement> innerArrayList =
+                        getIfStatements(((IfStatement) statementList.get(i)).getStatementList());
+                thisList.add(new WrappedIfStatement((IfStatement) statementList.get(i), false,
+                        (i == 0) ? null : statementList.get(i - 1),
+                        (i == statementList.size() - 1) ? null : statementList.get(i + 1),
+                        innerArrayList));
+                thisList.addAll(innerArrayList);
             }
-            return thisLIst;
-        } else {
-            return wrappedIfStatements;
+        }
+        return thisList;
+    }
+
+    public void notifyAllIfStatements() {
+        for (WrappedIfStatement wrappedIfStatement : wrappedIfStatements) {
+            wrappedIfStatement.setWasNotifiedForAllStatements(true);
         }
     }
 
@@ -89,25 +77,23 @@ public class Tree {
         return false;
     }
 
-    public void notifyAllIfStatements() {
-        for (WrappedIfStatement wrappedIfStatement : wrappedIfStatements) {
-            wrappedIfStatement.wasNotified = true;
-        }
-    }
-
     public void notifyExistingIfStatements(Tree tree) {
         for (WrappedIfStatement wrappedIfStatement : wrappedIfStatements) {
-            wrappedIfStatement.wasNotified = false;
+            wrappedIfStatement.setWasNotifiedForAllStatements(false);
         }
 
         for (WrappedIfStatement wrappedIfStatement : tree.wrappedIfStatements) {
             for (WrappedIfStatement wrappedIfStatement1 : wrappedIfStatements) {
-                if (wrappedIfStatement.ifStatement.equals(wrappedIfStatement1.ifStatement)
-                        && !wrappedIfStatement1.wasNotified) {
-                    wrappedIfStatement1.wasNotified = true;
+                if (wrappedIfStatement.getIfStatement().equals(wrappedIfStatement1.getIfStatement())
+                        && wrappedIfStatement1.wasNotNotified()) {
+                    wrappedIfStatement1.setWasNotified(true);
                     break;
                 }
             }
         }
+    }
+
+    public ArrayList<WrappedIfStatement> getWrappedIfStatements() {
+        return wrappedIfStatements;
     }
 }

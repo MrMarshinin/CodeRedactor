@@ -1,8 +1,8 @@
 package statements;
 
 public class IfStatement extends Statement {
-    private ConditionExpression compareExpression;
-    private BlockStatement blockStatement;
+    private final ConditionExpression compareExpression;
+    private final BlockStatement blockStatement;
 
     public IfStatement(ConditionExpression compareExpression, BlockStatement blockStatement) {
         this.compareExpression = compareExpression;
@@ -27,5 +27,9 @@ public class IfStatement extends Statement {
                 return false;
             } else return ((IfStatement) obj).blockStatement.equals(blockStatement);
         }
+    }
+
+    public StatementList getStatementList(){
+        return blockStatement.getStatementList();
     }
 }

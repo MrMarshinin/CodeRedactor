@@ -22,4 +22,8 @@ public class BlockStatement extends Statement {
             return statementList.equals(((BlockStatement) obj).statementList);
         }
     }
+
+    public StatementList getStatementList(){
+        return statementList;
+    }
 }
