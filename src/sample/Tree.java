@@ -37,7 +37,7 @@ public class Tree {
         newTree.notifyExistingIfStatements(this);
         for (WrappedIfStatement wrappedIfStatement : newTree.wrappedIfStatements) {
             if (wrappedIfStatement.wasNotNotified()) {
-                if (!wrappedIfStatement.hasSameNeighbours(this)){
+                if (!wrappedIfStatement.hasSameNeighbours(this)) {
                     wasIfStatementAdded = true;
                 }
             }

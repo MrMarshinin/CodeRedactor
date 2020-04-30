@@ -11,10 +11,9 @@ import javafx.stage.Stage;
 
 
 public class TextRedactor {
-    private Button button;
-    private Label output;
+    private final Button button;
+    private final Label output;
     private TextArea input;
-    private Parser parser;
     private TreeComparator treeComparator;
 
     void showRedactor(Stage primaryStage) {
@@ -29,27 +28,36 @@ public class TextRedactor {
 
     public TextRedactor() {
         button = new Button("Update");
-        //button.setOnAction(e -> doAction(input.getText()));
-        button.setOnAction(e -> treeComparator.update(input.getText()));
+        button.setOnAction(e -> doAction(input.getText()));
+//        button.setOnAction(e -> {
+//            try {
+//                treeComparator.update(input.getText());
+//            } catch (IncorrectInputException ignored) {
+//            }
+//        });
         output = new Label();
         output.setText("Output:");
         input = new TextArea();
-        //input.setOnKeyPressed(e -> treeComparator.update(input.getText()));
+        input.setOnKeyPressed(e -> {
+            try {
+                treeComparator.update(input.getText());
+            } catch (IncorrectInputException ignored) {
+            }
+        });
         treeComparator = new TreeComparator();
     }
 
-    public void update(String string) {
-        parser = new Parser(string);
-        parser.update();
-    }
-
     public void doAction(String string) {
-        ExpressionStatement.renewOutput();
-        parser = new Parser(string);
-        parser.doAction();
-        output.setText("Output:");
-        for (int i = 0; i < ExpressionStatement.getOutput().size(); i++) {
-            output.setText(output.getText() + " " + ExpressionStatement.getOutput().get(i));
+        try {
+            ExpressionStatement.renewOutput();
+            Parser parser = new Parser(string);
+            parser.doAction();
+            output.setText("Output:");
+            for (int i = 0; i < ExpressionStatement.getOutput().size(); i++) {
+                output.setText(output.getText() + " " + ExpressionStatement.getOutput().get(i));
+            }
+        } catch (IncorrectInputException e) {
+            output.setText("Output: Invalid input");
         }
     }
 }
