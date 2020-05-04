@@ -1,7 +1,7 @@
 package statements;
 
 public class BlockStatement extends Statement {
-    private StatementList statementList;
+    private final StatementList statementList;
 
     public BlockStatement(StatementList statementList) {
         this.statementList = statementList;

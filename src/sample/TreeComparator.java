@@ -8,8 +8,8 @@ public class TreeComparator {
 
         if (previousTree == null) {
             previousTree = new Tree(parser.getStatementList());
-            if (previousTree.containsIfStatement()) {
-                previousTree.notifyAllIfStatements();
+            if (previousTree.containsNotEmptyIfStatement()) {
+                previousTree.notifyAllIfStatements(true);
                 System.out.println("If statement was added");
             }
             return;
@@ -21,7 +21,7 @@ public class TreeComparator {
             System.out.println("If statement was added");
         }
 
-        currentTree.notifyAllIfStatements();
+        currentTree.notifyNotEmptyIfStatements(true);
         previousTree = currentTree;
     }
 }

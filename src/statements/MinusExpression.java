@@ -6,10 +6,12 @@ public class MinusExpression extends PlusMinusExpression {
         super(conditionExpression);
     }
 
+
     @Override
     public int getAnswer() {
         return  - conditionExpression.getAnswer();
     }
+
 
     @Override
     public boolean equals(Object obj) {

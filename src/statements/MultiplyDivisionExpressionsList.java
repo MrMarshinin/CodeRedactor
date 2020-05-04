@@ -6,13 +6,16 @@ public class MultiplyDivisionExpressionsList extends ConditionExpression {
     private final ArrayList<MultiplyDivisionExpression> multiplyDivisionExpressions = new ArrayList<>();
     private final SimpleExpression simpleExpression;
 
+
     public MultiplyDivisionExpressionsList(SimpleExpression simpleExpression) {
         this.simpleExpression = simpleExpression;
     }
 
+
     public void addExpression(MultiplyDivisionExpression multiplyDivisionExpression) {
         multiplyDivisionExpressions.add(multiplyDivisionExpression);
     }
+
 
     @Override
     public int getAnswer() {
@@ -26,6 +29,7 @@ public class MultiplyDivisionExpressionsList extends ConditionExpression {
         }
         return answer;
     }
+
 
     @Override
     public boolean equals(Object obj) {

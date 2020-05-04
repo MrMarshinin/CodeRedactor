@@ -16,6 +16,7 @@ public class TextRedactor {
     private TextArea input;
     private TreeComparator treeComparator;
 
+
     void showRedactor(Stage primaryStage) {
         primaryStage.setTitle("Code Redactor");
         VBox layout = new VBox(10);
@@ -25,6 +26,7 @@ public class TextRedactor {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+
 
     public TextRedactor() {
         button = new Button("Update");
@@ -46,6 +48,7 @@ public class TextRedactor {
         });
         treeComparator = new TreeComparator();
     }
+
 
     public void doAction(String string) {
         try {

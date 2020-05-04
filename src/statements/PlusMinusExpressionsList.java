@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class PlusMinusExpressionsList extends ConditionExpression {
     private final ArrayList<PlusMinusExpression> plusMinusExpressions = new ArrayList<>();
 
+
     public void addExpression(PlusMinusExpression plusMinusExpression){
         plusMinusExpressions.add(plusMinusExpression);
     }
+
 
     @Override
     public int getAnswer() {
@@ -17,6 +19,7 @@ public class PlusMinusExpressionsList extends ConditionExpression {
         }
         return answer;
     }
+
 
     @Override
     public boolean equals(Object obj) {

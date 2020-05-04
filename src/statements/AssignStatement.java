@@ -1,8 +1,8 @@
 package statements;
 
 public class AssignStatement extends Statement {
-    private Identifier identifier;
-    private ConditionExpression conditionExpression;
+    private final Identifier identifier;
+    private final ConditionExpression conditionExpression;
 
     public AssignStatement(Identifier identifier, ConditionExpression conditionExpression) {
         this.identifier = identifier;

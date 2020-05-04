@@ -10,10 +10,12 @@ public class Tree {
     private final StatementList statementList;
     private final ArrayList<WrappedIfStatement> wrappedIfStatements;
 
+
     public Tree(StatementList statementList) {
         this.statementList = statementList;
         this.wrappedIfStatements = getIfStatements(statementList);
     }
+
 
     @Override
     public boolean equals(Object obj) {
@@ -29,22 +31,21 @@ public class Tree {
     }
 
 
-    /**
-     * Returns true if newTree contains IfStatement that was not notified neither in newTree nor in this.
-     */
     public boolean wasIfStatementAdded(Tree newTree) {
         boolean wasIfStatementAdded = false;
-        newTree.notifyExistingIfStatements(this);
+        newTree.notifyExistingNotEmptyIfStatements(this);
         for (WrappedIfStatement wrappedIfStatement : newTree.wrappedIfStatements) {
             if (wrappedIfStatement.wasNotNotified()) {
                 if (!wrappedIfStatement.hasSameNeighbours(this)) {
-                    wasIfStatementAdded = true;
+                    if (!wrappedIfStatement.getIfStatement().isEmpty()) {
+                        wasIfStatementAdded = true;
+                    }
                 }
             }
         }
-        notifyAllIfStatements();
         return wasIfStatementAdded;
     }
+
 
     private ArrayList<WrappedIfStatement> getIfStatements(StatementList statementList) {
         ArrayList<WrappedIfStatement> thisList = new ArrayList<>();
@@ -62,36 +63,48 @@ public class Tree {
         return thisList;
     }
 
-    public void notifyAllIfStatements() {
+
+    public void notifyAllIfStatements(boolean wasNotified) {
         for (WrappedIfStatement wrappedIfStatement : wrappedIfStatements) {
-            wrappedIfStatement.setWasNotifiedForAllStatements(true);
+            wrappedIfStatement.setWasNotifiedForAllStatements(wasNotified);
         }
     }
 
-    public boolean containsIfStatement() {
+
+    public void notifyNotEmptyIfStatements(boolean wasNotified) {
+        for (WrappedIfStatement wrappedIfStatement : wrappedIfStatements) {
+            if (!wrappedIfStatement.getIfStatement().isEmpty()) {
+                wrappedIfStatement.setWasNotifiedForNotEmptyStatements(wasNotified);
+            }
+        }
+    }
+
+
+    public boolean containsNotEmptyIfStatement() {
         for (int i = 0; i < statementList.size(); i++) {
-            if (statementList.get(i) instanceof IfStatement) {
+            if (statementList.get(i) instanceof IfStatement
+                    && !((IfStatement) statementList.get(i)).isEmpty()) {
                 return true;
             }
         }
         return false;
     }
 
-    public void notifyExistingIfStatements(Tree tree) {
-        for (WrappedIfStatement wrappedIfStatement : wrappedIfStatements) {
-            wrappedIfStatement.setWasNotifiedForAllStatements(false);
-        }
 
+    public void notifyExistingNotEmptyIfStatements(Tree tree) {
+        notifyAllIfStatements(false);
         for (WrappedIfStatement wrappedIfStatement : tree.wrappedIfStatements) {
             for (WrappedIfStatement wrappedIfStatement1 : wrappedIfStatements) {
                 if (wrappedIfStatement.getIfStatement().equals(wrappedIfStatement1.getIfStatement())
-                        && wrappedIfStatement1.wasNotNotified()) {
+                        && wrappedIfStatement1.wasNotNotified()
+                        && !wrappedIfStatement1.getIfStatement().isEmpty()) {
                     wrappedIfStatement1.setWasNotified(true);
                     break;
                 }
             }
         }
     }
+
 
     public ArrayList<WrappedIfStatement> getWrappedIfStatements() {
         return wrappedIfStatements;

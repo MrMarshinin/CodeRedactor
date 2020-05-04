@@ -5,6 +5,7 @@ public class DivisionExpression extends MultiplyDivisionExpression {
         super(simpleExpression);
     }
 
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null){

@@ -5,10 +5,12 @@ public class CompareLessExpression extends CompareExpression {
         super(firstExpression, secondExpression);
     }
 
+
     @Override
     public int getAnswer() {
         return (firstExpression.getAnswer() < secondExpression.getAnswer()) ? 1 : 0;
     }
+
 
     @Override
     public boolean equals(Object obj) {

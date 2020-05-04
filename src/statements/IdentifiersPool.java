@@ -5,9 +5,11 @@ import java.util.ArrayList;
 public class IdentifiersPool {
     private final ArrayList<Identifier> identifiers;
 
+
     public IdentifiersPool() {
         identifiers = new ArrayList<>();
     }
+
 
     public Identifier getIdentifier(String name) {
         if (!identifiers.isEmpty()) {

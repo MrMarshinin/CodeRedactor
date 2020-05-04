@@ -3,7 +3,7 @@ package statements;
 
 
 public class Identifier extends SimpleExpression{
-    private String name;
+    private final String name;
     private static IdentifiersPool identifiersPool;
 
     public Identifier(String name) {
